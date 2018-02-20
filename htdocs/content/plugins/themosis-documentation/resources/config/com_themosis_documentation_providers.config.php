@@ -4,5 +4,5 @@
  * Plugin services providers configuration.
  */
 return [
-    Tld\Domain\Plugin\Services\RoutingService::class
+    Com\Themosis\Documentation\Services\RoutingService::class
 ];
