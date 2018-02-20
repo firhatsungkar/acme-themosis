@@ -10,4 +10,9 @@ class Sample extends BaseController
     {
         return view('sample');
     }
+
+    public function docs()
+    {
+        return view('com.themosis.documentation.docs.index');
+    }
 }
