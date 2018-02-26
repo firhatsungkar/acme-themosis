@@ -19,7 +19,7 @@ $capsule->addConnection([
     'password'  => DB_PASSWORD,
     'charset'   => DB_CHARSET,
     'collation' => DB_COLLATE,
-    'prefix'    => $table_prefix
+    'prefix'    => ''
 ]);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
