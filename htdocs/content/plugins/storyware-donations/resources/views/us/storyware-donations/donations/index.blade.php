@@ -129,7 +129,4 @@
   <input type="hidden" name="orderBy" value="{{$orderBy}}"/>
   <input type="hidden" name="order" value="{{$order}}"/>
   </form>
-  <pre>
-    {{$sortUrl}}
-  </pre>
 @endsection
