@@ -12,6 +12,12 @@ class AdminDonationsController extends BaseController {
    * @var Member
    */
   protected $member;
+  protected $default = [
+    'item_per_page' => 10,
+    'order' => 'asc',
+    'orderBy' => 'id',
+    's' => null
+  ];
 
   /**
    * AdminDonationsController Constructor
@@ -39,10 +45,10 @@ class AdminDonationsController extends BaseController {
     $sortUrl = $this->getUrl(true);
     
     // Set default value
-    $itemPerPage = $this->getParam($params, 'item_per_page', 10);
-    $order = $this->getParam($query, 'order', 'asc');
-    $orderBy = $this->getParam($query, 'orderBy', 'id');
-    $search = $this->getParam($params, 's', null);
+    $itemPerPage = $this->getParam($params, 'item_per_page', $this->default['item_per_page']);
+    $order = $this->getParam($query, 'order', $this->default['order']);
+    $orderBy = $this->getParam($query, 'orderBy', $this->default['orderBy']);
+    $search = $this->getParam($params, 's', $this->default['s']);
 
     // Sort members
     $members = $this->member->orderBy($orderBy, $order);
@@ -99,15 +105,17 @@ class AdminDonationsController extends BaseController {
     // Inverted order and remove orderBy
     if ($inverted) {
       $params = $this->getQuery();
+      $params['order'] = array_key_exists('order', $params) ? $params['order'] : $this->default['order'];
+      $params['orderBy'] = array_key_exists('orderBy', $params) ? $params['orderBy'] : $this->default['orderBy'];
       $invertedParams = array_map(function ($param) use ($params) {
         if(array_search($param, $params) === 'order') {
           return $param === 'asc' ? 'desc' : 'asc';
         }
         return $param;
       }, $params);
-      $invertedParams = array_filter($invertedParams, function ($param) use ($params) {
-        return array_search($param, $params) !== 'orderBy';
-      });
+      // $invertedParams = array_filter($invertedParams, function ($param) use ($params) {
+      //   return array_search($param, $params) !== 'orderBy';
+      // });
       $uri = '';
       foreach($invertedParams as $key => $value) {
         $uri .= isset($value) ? "$key=$value&" : "$key&";
