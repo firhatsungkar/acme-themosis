@@ -1,5 +1,6 @@
-<div class="wrap">
-<h1 class="wp-heading-inline">{{$__page->get('title')}}</h1>
+@extends('us.storyware-donations.layouts.main')
+@section('main')
+  <h1 class="wp-heading-inline">{{$__page->get('title')}}</h1>
   <a href="http://acme-themosis.test/cms/wp-admin/post-new.php" class="page-title-action">Add New</a>
   <hr class="wp-header-end">
   <h2 class="screen-reader-text">List All Donation</h2>
@@ -128,4 +129,4 @@
   <input type="hidden" name="orderBy" value="{{$orderBy}}"/>
   <input type="hidden" name="order" value="{{$order}}"/>
   </form>
-</div>
+@endsection
