@@ -13,11 +13,22 @@ class AdminConstituentMatchingController extends BaseController {
    */
   protected $membershipConstituent;
 
+  /**
+   * AdminConstituentMatchingController Constructor
+   *
+   * @param MembershipConstituent $membershipConstituent
+   */
   public function __construct(MembershipConstituent $membershipConstituent)
   {
     $this->membershipConstituent = $membershipConstituent;
   }
   
+  /**
+   * List All Constituent Member
+   *
+   * @param array $params
+   * @return View
+   */
   public function index($params = [])
   {
     return View::make('sample');
