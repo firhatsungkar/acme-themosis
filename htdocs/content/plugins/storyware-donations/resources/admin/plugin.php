@@ -4,7 +4,11 @@ use Themosis\Facades\Action;
 use Themosis\Facades\Input;
 use Themosis\Facades\Page;
 use Us\Storyware\Donations\Models\Member;
+use Us\Storyware\Donations\Models\MembershipMonth;
+use Us\Storyware\Donations\Models\MembershipConstituent;
 use Us\Storyware\Donations\Controllers\AdminDonationsController;
+use Us\Storyware\Donations\Controllers\AdminMonthlyMembershipController;
+use Us\Storyware\Donations\Controllers\AdminConstituentMatchingController;
 
 
 /**
@@ -15,17 +19,25 @@ use Us\Storyware\Donations\Controllers\AdminDonationsController;
 $request = Input::all();
 
 // Initiate Model
-$model = new Member();
+$model = [
+  'member' => new Member(),
+  'membershipMonth' => new MembershipMonth(),
+  'membershipConstituent' => new MembershipConstituent(),
+];
 
 // Initiate Controller
-$controller = new AdminDonationsController( $model );
+$controller = [
+  'donations'         => new AdminDonationsController( $model['member'] ),
+  'monthlyMembership' => new AdminMonthlyMembershipController( $model['membershipMonth'] ),
+  'constituentMatching' => new AdminConstituentMatchingController( $model['membershipConstituent'] ),
+];
 
 // Define The Page
 $donation = Page::make(
               'storyware-donations',
               'All Donations',
               null,
-              $controller->index($request)
+              $controller['donations']->index($request)
             )
             ->set([
               'capability' => 'manage_options',
@@ -40,7 +52,7 @@ $monthlyMembership = Page::make(
               'storyware-monthly-membership',
               'Monthly Membership',
               'storyware-donations',
-              $controller->monthlyMembership($request)
+              $controller['monthlyMembership']->index($request)
             )
             ->set([
               'menu' => __("Monthly Membership")
@@ -50,7 +62,7 @@ $constituentMatching = Page::make(
               'storyware-constituent-matching',
               'Constituent Matching',
               'storyware-donations',
-              $controller->constituentMatching($request)
+              $controller['constituentMatching']->index($request)
             )
             ->set([
               'menu' => __("Constituent Matching")
