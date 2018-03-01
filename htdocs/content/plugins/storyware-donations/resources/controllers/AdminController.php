@@ -6,6 +6,24 @@ use Themosis\Route\BaseController;
 
 class AdminController extends BaseController {
   
+  /** Locale Format
+   * @var string
+   */
+  protected $locale = 'en_US';
+
+  /**
+   * @var array
+   */
+  protected $params = [];
+
+  public function __construct($params)
+  {
+    // Set Local Format
+    setlocale(LC_MONETARY, $this->locale);
+    // Set params
+    $this->params = $params;
+  }
+
   /**
    * Generate URL for form
    *
@@ -73,5 +91,20 @@ class AdminController extends BaseController {
       return $params[$key];
     }
     return $default;
+  }
+
+  /**
+   * Check page with the slug
+   *
+   * @param string $pageSlug
+   * @return boolean
+   */
+  protected function isPage(string $pageSlug)
+  {
+    $query = $this->getQuery();
+    if ($query['page'] !== $pageSlug) {
+      return false;
+    }
+    return true;
   }
 }
