@@ -88,7 +88,7 @@
         </tfoot>
     </table>
     @else
-    <p style="color:#666;font-size:18px;margin:0;padding:100px 0 0;text-align:center;">No donation files found.</p>
+    <p style="color:#666;font-size:18px;margin:0;padding:100px 0 0;text-align:center;">No mounthly member found.</p>
     @endif
   <input type="hidden" name="orderBy" value="{{$orderBy}}"/>
   <input type="hidden" name="order" value="{{$order}}"/>
