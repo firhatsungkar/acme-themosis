@@ -122,6 +122,62 @@
         </tr>
         @endforeach
       </tbody>
+      <tfoot>
+        <tr>
+          <td id="cb" class="manage-column column-cb check-column">
+            <label class="screen-reader-text" for="cb-select-all-1">Select All</label>
+            <input id="cb-select-all-1" type="checkbox">
+          </td>
+          <th scope="col" id="id" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=id">
+              <span>Id</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+          <th scope="col" id="last_name" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=last_name">
+              <span>Last Name</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+          <th scope="col" id="first_name" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=first_name">
+              <span>First Name</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+          <th scope="col" id="total" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=total">
+              <span>Total</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+          <th scope="col" id="type" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=type">
+              <span>Type</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+          <th scope="col" id="exported_at" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=exported_at">
+              <span>Exported At</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+          <th scope="col" id="exported_by" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=exported_by">
+              <span>Exported By</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+          <th scope="col" id="created_at" class="manage-column column-title column-primary sortable desc">
+            <a href="{{$sortUrl}}&amp;orderBy=order_by">
+              <span>Created At</span>
+              <span class="sorting-indicator"></span>
+            </a>
+          </th>
+        </tr>
+      </tfoot>
     </table>
     @else
     <p style="color:#666;font-size:18px;margin:0;padding:100px 0 0;text-align:center;">No donation files found.</p>
