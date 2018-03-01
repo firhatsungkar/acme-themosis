@@ -12,7 +12,7 @@ class AdminDonationsController extends AdminController {
    * @var Member
    */
   protected $member;
-  
+
   /** Default params
    * @var array
    */
@@ -39,10 +39,11 @@ class AdminDonationsController extends AdminController {
    * @param array $params
    * @return View
    */
-  public function index($params = [])
+  public function index()
   {
-    // Get query
+    $params = $this->params;
     $query = $this->getQuery();
+    $isCurrentPage = $this->isPage('storyware-donations');
     
     // Get Uri
     $url = $this->getUrl();
@@ -54,14 +55,20 @@ class AdminDonationsController extends AdminController {
     $orderBy = $this->getParam($query, 'orderBy', $this->default['orderBy']);
     $search = $this->getParam($params, 's', $this->default['s']);
 
-    // Sort members
-    $members = $this->member->orderBy($orderBy, $order);
+    // Members
+    $members = $this->member;
+
+    // Sort Members
+    if($isCurrentPage) {
+      $members = $members->orderBy($orderBy, $order);
+    }
 
     // Filter members
-    if (isset($search) && $search !== '') {
+    if ($isCurrentPage && isset($search) && $search !== '') {
       $members = $members->where('members.first_name', 'LIKE', "%$search%")
                         ->orWhere('members.last_name', 'LIKE', "%$search%");
     }
+
     // Get members with pagination
     $members = $members->paginate($itemPerPage);
     
