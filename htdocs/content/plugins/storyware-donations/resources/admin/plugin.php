@@ -6,6 +6,7 @@ use Themosis\Facades\Page;
 use Us\Storyware\Donations\Models\Member;
 use Us\Storyware\Donations\Models\MembershipMonth;
 use Us\Storyware\Donations\Models\MembershipConstituent;
+use Us\Storyware\Donations\Controllers\AdminController;
 use Us\Storyware\Donations\Controllers\AdminDonationsController;
 use Us\Storyware\Donations\Controllers\AdminMonthlyMembershipController;
 use Us\Storyware\Donations\Controllers\AdminConstituentMatchingController;
@@ -25,6 +26,9 @@ $model = [
   'membershipConstituent' => new MembershipConstituent(),
 ];
 
+// Initiate BaseController
+$baseController = new AdminController($request);
+
 // Initiate Controller
 $controller = [
   'donations'         => new AdminDonationsController( $model['member'] ),
@@ -37,7 +41,7 @@ $donation = Page::make(
               'storyware-donations',
               'All Donations',
               null,
-              $controller['donations']->index($request)
+              $controller['donations']->index()
             )
             ->set([
               'capability' => 'manage_options',
@@ -52,7 +56,7 @@ $monthlyMembership = Page::make(
               'storyware-monthly-membership',
               'Monthly Membership',
               'storyware-donations',
-              $controller['monthlyMembership']->index($request)
+              $controller['monthlyMembership']->index()
             )
             ->set([
               'menu' => __("Monthly Membership")
@@ -62,7 +66,7 @@ $constituentMatching = Page::make(
               'storyware-constituent-matching',
               'Constituent Matching',
               'storyware-donations',
-              $controller['constituentMatching']->index($request)
+              $controller['constituentMatching']->index()
             )
             ->set([
               'menu' => __("Constituent Matching")
