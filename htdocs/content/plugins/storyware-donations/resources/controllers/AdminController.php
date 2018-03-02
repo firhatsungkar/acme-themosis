@@ -102,7 +102,7 @@ class AdminController extends BaseController {
   protected function isPage(string $pageSlug)
   {
     $query = $this->getQuery();
-    if ($query['page'] !== $pageSlug) {
+    if (isset($query['page']) && $query['page'] !== $pageSlug) {
       return false;
     }
     return true;
